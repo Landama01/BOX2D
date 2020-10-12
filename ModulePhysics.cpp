@@ -98,7 +98,7 @@ update_status ModulePhysics::PostUpdate()
 		b->CreateFixture(&fixture);
 		// TODO 2: To have the box behave normally, set fixture's density to 1.0f
 
-		fixture.density = 1.0;
+		fixture.density = 1.0f;
 
 	}
 
@@ -106,22 +106,32 @@ update_status ModulePhysics::PostUpdate()
 	{
 		// TODO 3: Create a chain shape using those vertices
 		// remember to convert them from pixels to meters!
-		/*
-		int points[24] = {
-			-38, 80,
-			-44, -54,
-			-16, -60,
-			-16, -17,
-			19, -19,
-			19, -79,
-			61, -77,
-			57, 73,
-			17, 78,
-			20, 16,
-			-25, 13,
-			-9, 72
+		b2BodyDef body;
+		body.type = b2_dynamicBody;
+		float radius = PIXEL_TO_METERS(25);
+		body.position.Set(PIXEL_TO_METERS(App->input->GetMouseX()), PIXEL_TO_METERS(App->input->GetMouseY()));
+
+		b2Body* b = world->CreateBody(&body);
+
+		b2ChainShape shape;
+
+		float points[24] = {
+			PIXEL_TO_METERS(-38), PIXEL_TO_METERS(80),
+			PIXEL_TO_METERS(-44), PIXEL_TO_METERS(-54),
+			PIXEL_TO_METERS(-16), PIXEL_TO_METERS(-60),
+			PIXEL_TO_METERS(-16), PIXEL_TO_METERS(-17),
+			PIXEL_TO_METERS(19), PIXEL_TO_METERS(-19),
+			PIXEL_TO_METERS(19), PIXEL_TO_METERS(-79),
+			PIXEL_TO_METERS(61), PIXEL_TO_METERS(-77),
+			PIXEL_TO_METERS(57), PIXEL_TO_METERS(73),
+			PIXEL_TO_METERS(17), PIXEL_TO_METERS(78),
+			PIXEL_TO_METERS(20), PIXEL_TO_METERS(16),
+			PIXEL_TO_METERS(-25), PIXEL_TO_METERS(13),
+			PIXEL_TO_METERS(-9), PIXEL_TO_METERS(72)
 		};
-		*/
+
+		//shape.CreateLoop(points, 24);
+		
 	}
 
 	if(App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
