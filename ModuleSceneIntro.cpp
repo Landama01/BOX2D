@@ -41,7 +41,25 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	// TODO 5: Move all creation of bodies on 1,2,3 key press here in the scene
-	
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25);
+
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 1, 0.5);
+		// TODO 1: When pressing 2, create a box on the mouse position
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
+	{
+		App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY());
+		// TODO 3: Create a chain shape using those vertices
+		// remember to convert them from pixels to meters!
+
+	}
 	// TODO 7: Draw all the circles using "circle" texture
 
 	return UPDATE_CONTINUE;
