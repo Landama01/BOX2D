@@ -61,7 +61,14 @@ void ModulePhysics::CreateCircle(float x, float y, int r) {
 	shape.m_radius = radius;
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
+	fixture.density = 1.0f;
 	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	pbody->width = pbody->height = radius;
+
+	//return pbody;
 }
 
 void ModulePhysics::CreateRectangle(float x, float y, float hx, float hy) {
@@ -239,3 +246,16 @@ bool ModulePhysics::CleanUp()
 
 	return true;
 }
+
+void PhysBody::GetPosition(int& x, int& y)const {
+	b2Vec2 pos = body->GetPosition();
+	x = METERS_TO_PIXELS(pos.x) - width;
+	y = METERS_TO_PIXELS(pos.y) - height;
+}
+
+float PhysBody::GetRotation()const {
+	return RADTODEG * body->GetAngle();
+}
+
+
+ 
